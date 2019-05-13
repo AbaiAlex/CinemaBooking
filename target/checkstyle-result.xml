@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="C:\Users\Zoli\Documents\NetBeansProjects\cinemabooking\cinemabooking\src\main\java\hu\deik\cinemabooking\dao\Dom.java">
+</file>
+<file name="C:\Users\Zoli\Documents\NetBeansProjects\cinemabooking\cinemabooking\src\main\java\hu\deik\cinemabooking\dao\DomImpl.java">
+</file>
+<file name="C:\Users\Zoli\Documents\NetBeansProjects\cinemabooking\cinemabooking\src\main\java\hu\deik\cinemabooking\dao\package-info.java">
+</file>
+<file name="C:\Users\Zoli\Documents\NetBeansProjects\cinemabooking\cinemabooking\src\main\java\hu\deik\cinemabooking\MainApp.java">
+</file>
+<file name="C:\Users\Zoli\Documents\NetBeansProjects\cinemabooking\cinemabooking\src\main\java\hu\deik\cinemabooking\model\dto\Foglalas.java">
+</file>
+<file name="C:\Users\Zoli\Documents\NetBeansProjects\cinemabooking\cinemabooking\src\main\java\hu\deik\cinemabooking\model\dto\package-info.java">
+</file>
+<file name="C:\Users\Zoli\Documents\NetBeansProjects\cinemabooking\cinemabooking\src\main\java\hu\deik\cinemabooking\package-info.java">
+</file>
+<file name="C:\Users\Zoli\Documents\NetBeansProjects\cinemabooking\cinemabooking\src\main\resources\logging.properties">
+</file>
+</checkstyle>

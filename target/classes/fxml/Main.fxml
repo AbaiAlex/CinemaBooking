@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
+            prefWidth="700.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.deik.cinemabooking.controller.MainController">
+    <children>
+        <SplitPane dividerPositions="0.31270903010033446" prefHeight="500.0" prefWidth="700.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <Text layoutX="95.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Név"/>
+                        <TextField fx:id="nevInput" layoutX="29.0" layoutY="22.0"/>
+                        <Text layoutX="91.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email"/>
+                        <TextField fx:id="emailInput" layoutX="29.0" layoutY="64.0"/>
+                        <TextField fx:id="telefonInput" layoutX="32.0" layoutY="106.0"/>
+                        <Text layoutX="75.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonszám"/>
+                        <TextField fx:id="jegyekSzamaInput" layoutX="32.0" layoutY="158.0"/>
+                        <Text layoutX="72.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="Jegyek száma"/>
+                        <Button layoutX="80.0" layoutY="192.0" mnemonicParsing="false" onAction="#doFoglalas"
+                                text="Foglal"/>
+                        <Button layoutX="69.0" layoutY="394.0" mnemonicParsing="false" onAction="#showFoglalasaim"
+                                text="Foglalásaim"/>
+                        <Button layoutX="81.0" layoutY="432.0" mnemonicParsing="false" onAction="#doKilepes"
+                                text="Kilépés"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <SplitPane dividerPositions="0.4012096774193548" orientation="VERTICAL" prefHeight="498.0"
+                                   prefWidth="477.0">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                    <children>
+                                        <MenuButton layoutX="14.0" layoutY="25.0" mnemonicParsing="false"
+                                                    text="film kiválasztása">
+                                            <items>
+                                                <MenuItem mnemonicParsing="false" onAction="#setFilm"
+                                                          text="Avengers: Endgame"/>
+                                                <MenuItem mnemonicParsing="false" onAction="#setFilm"
+                                                          text="Star Wars IX"/>
+                                            </items>
+                                        </MenuButton>
+                                        <DatePicker fx:id="selectDate" layoutX="152.0" layoutY="25.0"/>
+                                        <Text layoutX="187.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Dátum kiválasztása"/>
+                                        <MenuButton layoutX="351.0" layoutY="25.0" mnemonicParsing="false"
+                                                    text="Időpont">
+                                            <items>
+                                                <MenuItem mnemonicParsing="false" onAction="#setIdopont" text="12:00"/>
+                                                <MenuItem mnemonicParsing="false" onAction="#setIdopont" text="16:00"/>
+                                                <MenuItem mnemonicParsing="false" onAction="#setIdopont" text="20:00"/>
+                                            </items>
+                                        </MenuButton>
+                                        <Text fx:id="filmCimeText" layoutX="65.0" layoutY="77.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0" textAlignment="CENTER"/>
+                                        <Text fx:id="idopontText" layoutX="381.0" layoutY="77.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0" textAlignment="CENTER"/>
+                                        <Text fx:id="validator" layoutX="226.0" layoutY="178.0" strokeType="OUTSIDE"
+                                              strokeWidth="0.0" styleClass="error" textAlignment="CENTER"/>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="408.0" prefWidth="475.0"/>
+                            </items>
+                        </SplitPane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>
