@@ -1,0 +1,1 @@
+package hu.deik.cinemabooking.service.util;
