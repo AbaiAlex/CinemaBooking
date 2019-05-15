@@ -1,6 +1,8 @@
 package hu.deik.cinemabooking.dao;
 
 import hu.deik.cinemabooking.model.dto.Foglalas;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -21,15 +23,18 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 
 /**
  * A {@link Dom} interfész implementációja.
  */
 public class DomImpl implements Dom {
+
+    /**
+     * A logger.
+     */
+    private static Logger logger = LoggerFactory.getLogger(DomImpl.class);
 
     /**
      * Dokumentum builder factory.
@@ -49,7 +54,7 @@ public class DomImpl implements Dom {
     /**
      * A foglalásokat tartalmazó {@link ArrayList}.
      */
-    public static ArrayList<Foglalas> foglalasok;
+    private List<Foglalas> foglalasok;
 
     /**
      * A {@link DomImpl} osztály konstruktora.
@@ -59,18 +64,34 @@ public class DomImpl implements Dom {
         try {
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(this.getClass().getClassLoader().getResourceAsStream("database/foglalasok.xml"));
-            listFoglalasok();
         } catch (SAXException | IOException | ParserConfigurationException e) {
-            e.getMessage();
+            logger.error("Hiba történt: " + e.getMessage());
         }
     }
 
     @Override
     public void saveFoglalas(Foglalas foglalas) {
+
+        logger.info("Saving foglalas");
+
         NodeList nodes = doc.getElementsByTagName("foglalasok");
         Element rootElement = (Element) nodes.item(0);
 
+
+        NodeList foglalasList = rootElement.getElementsByTagName("foglalas");
+
+        Long id = 0L;
+
+        if (foglalasList.getLength() > 0) {
+            Element foglalasElement = (Element) foglalasList.item(foglalasList.getLength() - 1);
+            id = Long.valueOf(foglalasElement.getElementsByTagName("id").item(0).getTextContent());
+            id++;
+        }
+
         Element foglalasNode = doc.createElement("foglalas");
+
+        Element idNode = doc.createElement("id");
+        idNode.appendChild(doc.createTextNode(id.toString()));
 
         Element nevNode = doc.createElement("nev");
         nevNode.appendChild(doc.createTextNode(foglalas.getNev()));
@@ -93,6 +114,7 @@ public class DomImpl implements Dom {
         Element oraNode = doc.createElement("ora");
         oraNode.appendChild(doc.createTextNode(foglalas.getEloadasOra()));
 
+        foglalasNode.appendChild(idNode);
         foglalasNode.appendChild(nevNode);
         foglalasNode.appendChild(emailNode);
         foglalasNode.appendChild(telefonNode);
@@ -117,34 +139,59 @@ public class DomImpl implements Dom {
             StreamResult result = new StreamResult(file);
             transformer.transform(source, result);
         } catch (UnsupportedEncodingException | TransformerException ex) {
-            Logger.getLogger(DomImpl.class.getName()).log(Level.SEVERE, null, ex);
+            logger.info("Hiba történt: " + ex.getMessage());
         }
 
     }
 
     @Override
     public void listFoglalasok() {
+
+        logger.info("Listing foglalasok");
+
         NodeList nodeList = doc.getChildNodes();
 
         Element root = (Element) nodeList.item(0);
         NodeList foglalasList = root.getElementsByTagName("foglalas");
 
-        foglalasok = new ArrayList<>();
+        List<Foglalas> foglalasok = getFoglalasok();
+        if (foglalasok == null) {
+            foglalasok = new ArrayList<>();
+        }
 
         for (int i = 0; i < foglalasList.getLength(); i++) {
             Element foglalasElement = (Element) foglalasList.item(i);
             Foglalas foglalas = new Foglalas();
-
+            foglalas.setId(Long.valueOf(foglalasElement.getElementsByTagName("id").item(0).getTextContent()));
             foglalas.setNev(foglalasElement.getElementsByTagName("nev").item(0).getTextContent());
             foglalas.setEmail(foglalasElement.getElementsByTagName("email").item(0).getTextContent());
             foglalas.setTelefon(foglalasElement.getElementsByTagName("telefon").item(0).getTextContent());
             foglalas.setAr(Integer.valueOf(foglalasElement.getElementsByTagName("ar").item(0).getTextContent()));
             foglalas.setEloadasCime(foglalasElement.getElementsByTagName("eloadas").item(0).getTextContent());
-            foglalas.setNap(LocalDate.parse(foglalasElement.getElementsByTagName("datum").item(0).getTextContent(), DateTimeFormatter.ISO_DATE));
+            foglalas.setNap(LocalDate.parse(foglalasElement.getElementsByTagName("datum").item(0).getTextContent()));
             foglalas.setEloadasOra(foglalasElement.getElementsByTagName("ora").item(0).getTextContent());
 
             foglalasok.add(foglalas);
+            setFoglalasok(foglalasok);
         }
     }
 
+    /**
+     * Visszaadja a foglalásokat.
+     *
+     * @return a foglalások
+     */
+    public List<Foglalas> getFoglalasok() {
+        return foglalasok;
+    }
+
+    /**
+     * Beállítja a foglalásokat.
+     *
+     * @param foglalasok a foglalás
+     */
+    public void setFoglalasok(List<Foglalas> foglalasok) {
+        this.foglalasok = foglalasok;
+    }
 }
+
