@@ -172,7 +172,9 @@ public class MainController implements Initializable {
             valid = false;
         } else if (!foglalas.getTelefon().matches(PHONE_NUMBER_REGEX)) {
             if (validator != null) {
-                validator.setText("A telefonszám csak számokat tartalmazhat! Formátuma tetszőleges, +36 vagy 06-tal kezdődő magyarországi lehet!");
+                validator.setText("A telefonszám csak számokat tartalmazhat!\n" +
+                                  "Formátuma tetszőleges,\n" +
+                                  "+36 vagy 06-tal kezdődő magyarországi lehet!");
             }
             valid = false;
         } else if (foglalas.getNap() == null) {
