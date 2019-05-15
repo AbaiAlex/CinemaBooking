@@ -8,6 +8,10 @@ import java.time.LocalDate;
 public class Foglalas {
 
     /**
+     * Egyedi azonosító (kulcs).
+     */
+    private Long id;
+    /**
      * A név.
      */
     private String nev;
@@ -45,6 +49,7 @@ public class Foglalas {
     /**
      * Teljes konstruktor.
      *
+     * @param id          az azonosító
      * @param nev         a név
      * @param email       az email
      * @param telefon     a telefonszám
@@ -53,7 +58,8 @@ public class Foglalas {
      * @param eloadasOra  az előadás órája
      * @param eloadasCime az előadás címe
      */
-    public Foglalas(String nev, String email, String telefon, int ar, LocalDate nap, String eloadasOra, String eloadasCime) {
+    public Foglalas(Long id, String nev, String email, String telefon, int ar, LocalDate nap, String eloadasOra, String eloadasCime) {
+        this.id = id;
         this.nev = nev;
         this.email = email;
         this.telefon = telefon;
@@ -61,6 +67,24 @@ public class Foglalas {
         this.nap = nap;
         this.eloadasOra = eloadasOra;
         this.eloadasCime = eloadasCime;
+    }
+
+    /**
+     * Visszaadja az azonosítót.
+     *
+     * @return az azonosító
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Beállítja az azonosítót.
+     *
+     * @param id az azonosító
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -188,5 +212,5 @@ public class Foglalas {
     public void setEloadasCime(String eloadasCime) {
         this.eloadasCime = eloadasCime;
     }
-
 }
+
