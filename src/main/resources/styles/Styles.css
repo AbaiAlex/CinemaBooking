@@ -2,13 +2,22 @@
     -fx-font-weight: bold;
 }
 
-.error {
+#validator {
     -fx-font-weight: bold;
     -fx-font-color: red;
 }
 
 .orderList {
     -fx-border-style: solid;
-    -fx-border-color: red;
+    -fx-border-color: #0014ff;
     -fx-border-width: 1px;
+}
+#popcorn {
+    -fx-background-image: url("../Pictures/popcorn.png");
+}
+#moziTerem {
+    -fx-background-image: url("../Pictures/cinema.png");
+}
+#filmTekercs {
+    -fx-background-image: url("../Pictures/film.png");
 }
