@@ -24,7 +24,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <minJdk>1.8.0</minJdk>
         <mainClass>hu.deik.cinemabooking.MainApp</mainClass>
-        
+        <company.name>Alex's Garage Industries</company.name>
     </properties>
 
     <organization>
@@ -88,7 +88,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>1.19</version>
+                <version>1.18</version>
                 <executions>
                     <execution>
                         <configuration>
@@ -306,4 +306,5 @@
     </reporting>
 
 </project>
+
 
