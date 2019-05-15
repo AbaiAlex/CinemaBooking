@@ -2,6 +2,7 @@ package hu.deik.cinemabooking.controller;
 
 import hu.deik.cinemabooking.dao.DomImpl;
 import hu.deik.cinemabooking.model.dto.Foglalas;
+import hu.deik.cinemabooking.service.util.CinemaUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,10 +94,6 @@ public class MainController implements Initializable {
      * Szám típusú regex {@link String}.
      */
     private static final String NUMBER_REGEX = "\\d";
-    /**
-     * Egy jegy fix ára.
-     */
-    private static final int EGY_JEGY_ARA = 1500;
 
     /**
      * A foglalásért felelős esemény.
@@ -116,7 +113,7 @@ public class MainController implements Initializable {
         } else {
             jegyekSzama = jegyekSzamaInput.getText();
         }
-        foglalas.setAr(calculateAr(Integer.valueOf(jegyekSzama)));
+        foglalas.setAr(CinemaUtil.calculateAr(Integer.valueOf(jegyekSzama)));
         foglalas.setNap(selectDate.getValue());
         foglalas.setEloadasOra(idopontText.getText());
         foglalas.setEloadasCime(filmCimeText.getText());
@@ -223,17 +220,6 @@ public class MainController implements Initializable {
             logger.info("Validation failed");
         }
         return valid;
-    }
-
-    /**
-     * Ár kalkulátor segédmetódus. Egy jegy árát a {@link #EGY_JEGY_ARA} határozza meg.
-     *
-     * @param jegyekSzama a felületen felvett jegyek száma
-     * @return az ár
-     */
-    public int calculateAr(int jegyekSzama) {
-        logger.info("Calculating price");
-        return EGY_JEGY_ARA * jegyekSzama;
     }
 
     /**
