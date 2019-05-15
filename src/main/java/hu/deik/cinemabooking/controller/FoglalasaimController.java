@@ -53,7 +53,7 @@ public class FoglalasaimController implements Initializable {
     private TableColumn<Foglalas, Integer> arColumn;
 
     @FXML
-    private TableColumn<Foglalas, String> napColumn;
+    private TableColumn<Foglalas, LocalDate> napColumn;
 
     @FXML
     private TableColumn<Foglalas, String> eloadasCimeColumn;
@@ -126,20 +126,16 @@ public class FoglalasaimController implements Initializable {
 
     /**
      * Keresés kezelése.
-     *
-     * @param event az esemény
      */
     @FXML
-    void handleSearch(ActionEvent event) {
+    void handleSearch() {
         search.textProperty().addListener((observableValue, oldValue, newValue) -> {
             filteredData.setPredicate((Predicate<? super Foglalas>) foglalas -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
-                if (foglalas.getNev().toLowerCase().contains(lowerCaseFilter) || foglalas.getEmail().toLowerCase().contains(lowerCaseFilter) ||
-                        foglalas.getTelefon().contains(lowerCaseFilter) || String.valueOf(foglalas.getAr()).contains(lowerCaseFilter) || foglalas.getEloadasCime().contains(lowerCaseFilter)
-                        || foglalas.getEloadasOra().contains(lowerCaseFilter)) {
+                if (foglalas.getNev().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
                 return false;
@@ -157,34 +153,30 @@ public class FoglalasaimController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         logger.info("FoglalasaimController opened");
         setCellTable();
-        loadDateFromXml();
+        loadDataFromXml();
     }
 
+    /**
+     * Táblázat celláinak beállítása.
+     */
     private void setCellTable() {
         nevColumn.setCellValueFactory(new PropertyValueFactory<>("nev"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         telefonColumn.setCellValueFactory(new PropertyValueFactory<>("telefon"));
         arColumn.setCellValueFactory(new PropertyValueFactory<>("ar"));
-        napColumn.setCellValueFactory(new PropertyValueFactory<>("eloadas"));
-        eloadasCimeColumn.setCellValueFactory(new PropertyValueFactory<>("datum"));
-        eloadasOraColumn.setCellValueFactory(new PropertyValueFactory<>("ora"));
+        eloadasCimeColumn.setCellValueFactory(new PropertyValueFactory<>("eloadasCime"));
+        napColumn.setCellValueFactory(new PropertyValueFactory<>("nap"));
+        eloadasOraColumn.setCellValueFactory(new PropertyValueFactory<>("eloadasOra"));
     }
 
-    private void loadDateFromXml() {
+    /**
+     * Adatok betöltése az XML-ből.
+     */
+    private void loadDataFromXml() {
+        data.clear();
         DomImpl dom = new DomImpl();
         dom.listFoglalasok();
-        for (int i = 0; i < DomImpl.foglalasok.size(); i++) {
-            data.add(
-                    new Foglalas(
-                            DomImpl.foglalasok.get(i).getNev(),
-                            DomImpl.foglalasok.get(i).getEmail(),
-                            DomImpl.foglalasok.get(i).getTelefon(),
-                            DomImpl.foglalasok.get(i).getAr(),
-                            DomImpl.foglalasok.get(i).getNap(),
-                            DomImpl.foglalasok.get(i).getEloadasCime(),
-                            DomImpl.foglalasok.get(i).getEloadasOra()
-                    ));
-        }
+        data.addAll(dom.getFoglalasok());
         foglalasListTableView.setItems(data);
     }
 
