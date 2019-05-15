@@ -2,7 +2,7 @@ package hu.deik.cinemabooking.controller;
 
 import hu.deik.cinemabooking.model.dto.Foglalas;
 import org.apache.commons.lang3.time.DateUtils;
-import org.junit.*;
+import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -17,22 +17,6 @@ import static org.junit.Assert.assertEquals;
 public class MainControllerTest {
 
     public MainControllerTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -61,27 +45,6 @@ public class MainControllerTest {
         foglalas.setNap(now);
         expResult = true;
         result = instance.validate(foglalas);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of calculateAr method, of class MainController.
-     */
-    @Test
-    public void testCalculateAr() {
-        System.out.println("calculateAr");
-        int jegyekSzama = 0;
-        MainController instance = new MainController();
-        int expResult = 0;
-        int result = instance.calculateAr(jegyekSzama);
-        assertEquals(expResult, result);
-        jegyekSzama = 1;
-        expResult = 1500;
-        result = instance.calculateAr(jegyekSzama);
-        assertEquals(expResult, result);
-        jegyekSzama = 2;
-        expResult = 3000;
-        result = instance.calculateAr(jegyekSzama);
         assertEquals(expResult, result);
     }
 
