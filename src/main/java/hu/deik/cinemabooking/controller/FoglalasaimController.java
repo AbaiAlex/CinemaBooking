@@ -61,11 +61,11 @@ public class FoglalasaimController implements Initializable {
     @FXML
     private TableColumn<Foglalas, String> eloadasOraColumn;
 
-    @FXML
-    private TextField search;
+   /* @FXML
+    private TextField search;*/
 
     private ObservableList<Foglalas> data = FXCollections.observableArrayList();
-    private FilteredList<Foglalas> filteredData = new FilteredList<>(data, e -> true);
+  //  private FilteredList<Foglalas> filteredData = new FilteredList<>(data, e -> true);
 
     /**
      * Nyomtatás esemény kezelése.
@@ -124,10 +124,10 @@ public class FoglalasaimController implements Initializable {
         }
     }
 
-    /**
+   /* /**
      * Keresés kezelése.
      */
-    @FXML
+   /* @FXML
     void handleSearch() {
         search.textProperty().addListener((observableValue, oldValue, newValue) -> {
             filteredData.setPredicate((Predicate<? super Foglalas>) foglalas -> {
@@ -145,7 +145,7 @@ public class FoglalasaimController implements Initializable {
         sortedData.comparatorProperty().bind(foglalasListTableView.comparatorProperty());
         foglalasListTableView.setItems(sortedData);
     }
-
+*/
     /**
      * Foglalásaim controller inicializáló metódusa.
      */
