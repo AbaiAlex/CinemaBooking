@@ -24,7 +24,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <minJdk>1.8.0</minJdk>
         <mainClass>hu.deik.cinemabooking.MainApp</mainClass>
-        <company.name>Alex's Garage Industries</company.name>
+
     </properties>
 
     <organization>
@@ -75,6 +75,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>11.0.2</version>
+            <scope>compile</scope>
         </dependency>
         
     </dependencies>
@@ -202,9 +208,9 @@
                         </goals>
                     </execution>
                 </executions>
-</plugin>
+            </plugin>
 
-            <plugin>
+            <!-- <plugin>
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.8.3</version>
@@ -212,7 +218,7 @@
                     <mainClass>${mainClass}</mainClass>
                     <vendor>University of Debrecen</vendor>
                 </configuration>
-            </plugin>
+            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
@@ -247,6 +253,15 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.2</version>
+                <configuration>
+                    <mainClass>${mainClass}</mainClass>
+
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -299,5 +314,7 @@
     </reporting>
 
 </project>
+
+
 
 
